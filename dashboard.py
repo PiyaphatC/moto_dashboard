@@ -10,17 +10,8 @@ import os
 import time
 
 # ─── Config ───────────────────────────────────────────────────────────────────
-DATA_FILE = (
-    "/Users/park/Library/CloudStorage/"
-    "OneDrive-ChulalongkornUniversity/"
-    "CUTI-Sharepoint.Group - เอกสาร/"
-    "CUTI-Research/On-going Projects/"
-    "Columbia_ISM_LivingLab/"
-    "Supply and Demand Survey/survey results/Survey result/"
-    "Data_All_Submitted.xlsx"
-)
-
 LOGO_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_FILE = os.path.join(LOGO_DIR, "Data_All_Submitted.xlsx")
 
 st.set_page_config(
     page_title="Motorcycle Taxi Survey — Bangkok Living Lab",
