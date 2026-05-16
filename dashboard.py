@@ -16,8 +16,8 @@ DATA_FILE = (
     "CUTI-Sharepoint.Group - เอกสาร/"
     "CUTI-Research/On-going Projects/"
     "Columbia_ISM_LivingLab/"
-    "Supply and Demand Survey/Pilot results/"
-    "Data_Pilot_Submitted.xlsx"
+    "Supply and Demand Survey/survey results/Survey result/"
+    "Data_All_Submitted.xlsx"
 )
 
 LOGO_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -81,7 +81,7 @@ def pie(df, col, labels, title):
 
 def binary_bar(df, cols, labels, title):
     """For Q16/Q17 multi-select columns (0/1)."""
-    pct = {labels[c]: int(df[c].sum()) for c in cols if c in df.columns}
+    pct = {labels[c]: int(pd.to_numeric(df[c], errors="coerce").sum()) for c in cols if c in df.columns}
     fig = px.bar(
         x=list(pct.values()),
         y=list(pct.keys()),
@@ -463,38 +463,38 @@ elif page == "Supply — Driver Profile":
             with r1c1:
                 st.plotly_chart(pie(df, "D6Age",
                     {1:"18–24",2:"25–34",3:"35–44",4:"45–54",5:"55+"},
-                    "Driver age group"), use_container_width=True)
+                    "Driver age group"), use_container_width=True, key=f"{label}_D6Age")
             with r1c2:
                 st.plotly_chart(pie(df, "D7Sex",
                     {1:"Male",2:"Female",3:"LGBTQ+",4:"Prefer not to say"},
-                    "Driver gender"), use_container_width=True)
+                    "Driver gender"), use_container_width=True, key=f"{label}_D7Sex")
             with r1c3:
                 if "D15Years" in df.columns:
                     st.plotly_chart(pie(df, "D15Years",
                         {1:"<1 yr",2:"1–3 yrs",3:"3–5 yrs",4:"5–10 yrs",5:">10 yrs"},
-                        "Years as driver"), use_container_width=True)
+                        "Years as driver"), use_container_width=True, key=f"{label}_D15Years")
 
             r2c1, r2c2 = st.columns(2)
             with r2c1:
                 st.plotly_chart(bar(df, "D8Edu",
                     {1:"< Jr. High",2:"Jr. High",3:"Sr. High",4:"Vocational",
                      5:"Higher Voc.",6:"Bachelor",7:"Master",8:"PhD"},
-                    "Education level"), use_container_width=True)
+                    "Education level"), use_container_width=True, key=f"{label}_D8Edu")
             with r2c2:
                 if "D12Day" in df.columns:
                     st.plotly_chart(bar(df, "D12Day",
                         {1:"Mon",2:"Tue",3:"Wed",4:"Thu",5:"Fri",6:"Sat",7:"Sun"},
-                        "Busiest day of week"), use_container_width=True)
+                        "Busiest day of week"), use_container_width=True, key=f"{label}_D12Day")
 
             if "A1" in df.columns:
                 st.plotly_chart(bar(df, "A1",
                     {1:"Win",2:"App"},
-                    "A1 · Respondent type confirmation"), use_container_width=True)
+                    "A1 · Respondent type confirmation"), use_container_width=True, key=f"{label}_A1")
 
             if "C1" in df.columns:
                 st.plotly_chart(bar(df, "C1",
                     {1:"Own",2:"Rent",3:"Installment",4:"Other"},
-                    "C1 · Motorcycle ownership"), use_container_width=True)
+                    "C1 · Motorcycle ownership"), use_container_width=True, key=f"{label}_C1")
 
             # EV interest (E1, E2)
             if "E1" in df.columns:
@@ -504,13 +504,13 @@ elif page == "Supply — Driver Profile":
                     st.plotly_chart(bar(df, "E1",
                         {1:"Definitely yes",2:"Probably yes",3:"Unsure",
                          4:"Probably no",5:"Definitely no"},
-                        "E1 · Would switch to EV motorcycle?"), use_container_width=True)
+                        "E1 · Would switch to EV motorcycle?"), use_container_width=True, key=f"{label}_E1")
                 with ec2:
                     if "E2" in df.columns:
                         st.plotly_chart(bar(df, "E2",
                             {1:"Definitely yes",2:"Probably yes",3:"Unsure",
                              4:"Probably no",5:"Definitely no"},
-                            "E2 · Would rent EV motorcycle?"), use_container_width=True)
+                            "E2 · Would rent EV motorcycle?"), use_container_width=True, key=f"{label}_E2")
 
             if "D20_1" in df.columns:
                 st.markdown("### D20 · Problems faced")
@@ -524,4 +524,4 @@ elif page == "Supply — Driver Profile":
                 }
                 st.plotly_chart(
                     binary_bar(df, d20_cols, d20_labels, "Problems reported (# drivers)"),
-                    use_container_width=True)
+                    use_container_width=True, key=f"{label}_D20")

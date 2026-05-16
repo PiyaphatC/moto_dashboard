@@ -11,7 +11,8 @@ streamlit run "$SCRIPT_DIR/dashboard.py" \
   --server.port $PORT \
   --server.headless true \
   --server.fileWatcherType poll \
-  --browser.gatherUsageStats false &
+  --browser.gatherUsageStats false \
+  --browser.serverAddress localhost &
 
 STREAMLIT_PID=$!
 echo "Streamlit PID: $STREAMLIT_PID"
@@ -20,8 +21,10 @@ echo "Streamlit PID: $STREAMLIT_PID"
 sleep 3
 
 echo ""
+echo "Local URL:  http://localhost:$PORT"
+echo ""
 echo "Starting Cloudflare Tunnel..."
-echo "Your public URL will appear below — share it with anyone."
+echo "Public URL for colleagues will appear below."
 echo "The dashboard auto-refreshes every 30 s when the Excel file changes."
 echo "Press Ctrl+C to stop everything."
 echo ""
