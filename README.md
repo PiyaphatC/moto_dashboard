@@ -3,7 +3,7 @@
 An interactive data dashboard for the **Bangkok Living Lab** pilot survey on informal motorcycle taxi (*Win*) and app-based motorcycle taxi usage.
 
 Built as part of the **CUTI × Columbia ISM** research collaboration.
-
+https://piyaphatc-moto-dashboard-dashboard-haro4p.streamlit.app/
 ---
 
 ## Overview
