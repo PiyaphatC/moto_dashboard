@@ -179,7 +179,7 @@ if page == "Overview":
                 background:green;padding:10px;border-radius:8px;font-size:13px;">
       <b>Legend</b><br>
       <span style="color:blue">●</span> Demand Win &nbsp;
-      <span style="color:green">●</span> Demand App<br>
+      <span style="color:purple">●</span> Demand App<br>
       <span style="color:orange">●</span> Supply Win &nbsp;
       <span style="color:red">●</span> Supply App
     </div>"""
